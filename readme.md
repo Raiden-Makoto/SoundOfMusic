@@ -1,0 +1,3 @@
+# Project Description
+
+I listen to Taylor Swift alot. In fact, I have listened to her for 228,103 minutes so far this year (≈14 hours a day). So anyways I got this amazing idea one day to build a ML pipeline that generates pop songs in her style. It starts with a pre-trained GPT2 model fine-tuned on a dataset of Taylor Swift songs which generates the lyrics. Then, there is a Transformer model that produces a melody based on the lyrics. Finally a synthesizer takes the melody and plays it while a visualizer shows how the waveforms change.
