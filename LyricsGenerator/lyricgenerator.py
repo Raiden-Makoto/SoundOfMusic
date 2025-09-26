@@ -38,3 +38,11 @@ outputs = swiftgpt(
 )
 
 print(outputs[0]["generated_text"])
+# Save generated lyrics to file
+generated_text = outputs[0]["generated_text"]
+try:
+    with open("lyricsout.txt", "w", encoding="utf-8") as f:
+        f.write(generated_text)
+    print("\nLyrics saved to lyricsout.txt")
+except Exception as e:
+    print(f"\nError saving lyrics to file: {e}")
