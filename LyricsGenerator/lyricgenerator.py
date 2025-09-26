@@ -36,3 +36,5 @@ outputs = swiftgpt(
     repetition_penalty=1.5,
     no_repeat_ngram_size=3,
 )
+
+print(outputs[0]["generated_text"])

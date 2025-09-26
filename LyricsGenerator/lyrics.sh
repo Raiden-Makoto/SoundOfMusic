@@ -10,9 +10,8 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-# Initialize conda and activate environment
-eval "$(conda shell.bash hook)"
-conda activate mididdsp
+# Activate Python virtual environment
+source ../venv/bin/activate
 
 # Install requirements
 pip install -r ../requirements.txt
@@ -21,5 +20,5 @@ pip install -r ../requirements.txt
 echo "Running Lyrics Generator with starting lyrics: $1"
 python lyricgenerator.py "$1"
 
-# Deactivate conda environment
-conda deactivate
+# Deactivate virtual environment
+deactivate
