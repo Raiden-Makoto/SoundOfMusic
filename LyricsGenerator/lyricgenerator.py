@@ -4,6 +4,7 @@ from transformers import ( # type: ignore
     pipeline
 )
 import torch # type: ignore
+import sys
 
 checkpoint_path = "./model_checkpoint"
 tokenizer = GPT2TokenizerFast.from_pretrained(checkpoint_path)
@@ -16,7 +17,12 @@ model.eval()
 
 swiftgpt = pipeline("text-generation", model=model, tokenizer=tokenizer, device=device)
 
-starting_lyrics = input("Enter the starting lyrics: ")
+# Get starting lyrics from command line argument
+if len(sys.argv) < 2:
+    print("Usage: python lyricgenerator.py '<starting_lyrics>'")
+    sys.exit(1)
+
+starting_lyrics = sys.argv[1]
 prompt = f"<|startofsong|> {starting_lyrics}"
 
 outputs = swiftgpt(
