@@ -173,7 +173,7 @@ threadpoolctl==3.5.0
 tokenizers==0.20.3
 toml==0.10.2
 toolz==1.0.0
-torch==2.4.1
+torch==2.8.0
 tornado @ file:///Users/runner/miniforge3/conda-bld/tornado_1717722703965/work
 tqdm==4.67.1
 traitlets @ file:///home/conda/feedstock_root/build_artifacts/traitlets_1713535121073/work
