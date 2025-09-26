@@ -206,7 +206,7 @@ python visualizer.py
 - **Python**: 3.11+
 - **RAM**: 16GB+
 - **Storage**: 5GB free space
-- **GPU**: Apple Silicon (M1/M2) or NVIDIA GPU
+- **GPU**: Apple Silicon or NVIDIA GPU
 
 ## 📄 License
 
