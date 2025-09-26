@@ -1,19 +1,34 @@
 # SoundOfMusic 🎵
 
-A complete AI-powered music generation pipeline that creates pop songs in Taylor Swift's style. The system generates lyrics using a fine-tuned GPT-2 model, creates melodies with a Transformer model, and provides real-time audio visualization.
+A complete AI-powered music generation pipeline that creates pop songs in Taylor Swift's style. The system generates lyrics using a fine-tuned GPT-2 model, creates melodies with a Transformer model, converts them to MIDI format, and provides real-time audio visualization.
 
 ## 🎯 Project Overview
 
-This project consists of two main components:
+This project consists of three main components:
 - **LyricsGenerator**: AI-powered lyric generation using a fine-tuned GPT-2 model
+- **SongComposer**: AI-powered melody generation using a Transformer model
 - **MIDIPlayer**: MIDI playback, harmonization, and 3D audio visualization
+
+## 🔄 Complete Pipeline
+
+The music generation pipeline follows this workflow:
+
+1. **Generate Lyrics** → 2. **Compose Melody** → 3. **Convert to MIDI** → 4. **Play & Visualize**
+
+```
+LyricsGenerator → SongComposer → MIDI Conversion → MIDIPlayer
+     ↓               ↓              ↓              ↓
+  lyrics.txt    melody.txt    output.mid    Audio Playback
+```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 - Python 3.11+
-- macOS (tested on macOS 25.0.0)
-- Homebrew (for Python installation)
+- Any OS (tested on macOS 26 Tahoe)
+- Homebrew or equivalent (for Python installation)
+
+**NOTE: SongComposer is a large model and requires at least 17GB of available storage. It is also recommended to have 18+ GB of RAM**
 
 ### Installation
 
@@ -64,6 +79,56 @@ python lyricgenerator.py "Your starting lyrics here"
 - Automatic model loading from `model_checkpoint/`
 - GPU/MPS/CPU device detection
 - Configurable generation parameters
+
+## 🎼 SongComposer
+
+### Overview
+The SongComposer uses a Transformer model to generate melodies and musical notation based on prompts. It outputs symbolic music format that can be converted to MIDI.
+
+### Usage
+
+#### Method 1: Using the shell script (Recommended)
+```bash
+cd SongComposer
+./composer.sh "Write a song about love"
+```
+
+#### Method 2: Direct Python execution
+```bash
+cd SongComposer
+source ../venv/bin/activate
+python composer.py "Write a song about love"
+```
+
+### Features
+- Command-line argument support for prompts
+- Automatic model loading from Hugging Face
+- GPU/MPS/CPU device detection
+- Outputs symbolic music format (notes and lyrics)
+
+### MIDI Conversion
+
+The generated symbolic music can be converted to MIDI format:
+
+#### Method 1: Using the shell script (Recommended)
+```bash
+cd SongComposer
+./convert.sh melody.txt output.mid
+```
+
+#### Method 2: Direct Python execution
+```bash
+cd SongComposer
+source ../venv/bin/activate
+python convert.py melody.txt output.mid
+```
+
+### Features
+- Parses symbolic music format (Lyric: text, Note: pitch duration)
+- Converts note names to MIDI numbers
+- Handles various note durations (Quarter, Eighth, etc.)
+- Configurable tempo (default: 96 BPM)
+- Creates MIDI files with piano instrument
 
 
 ## 🎼 MIDIPlayer
@@ -120,6 +185,13 @@ SoundOfMusic/
 │   ├── SwiftGPT.ipynb      # Jupyter notebook for model training
 │   ├── model_checkpoint/   # Fine-tuned model files
 │   └── readme.md
+├── SongComposer/
+│   ├── composer.py         # Main melody generation script
+│   ├── composer.sh         # Shell script wrapper
+│   ├── convert.py          # MIDI conversion script
+│   ├── convert.sh          # MIDI conversion shell script
+│   ├── composer.ipynb      # Original Jupyter notebook
+│   └── readme.md
 ├── MIDIPlayer/
 │   ├── scripts/            # Python scripts
 │   ├── soundfonts/         # SoundFont files
@@ -150,17 +222,58 @@ The `model_checkpoint/` directory contains:
 
 ## 🎵 Example Usage
 
-### Generate Lyrics
+### Complete Pipeline Example
+
+#### 1. Generate Lyrics
 ```bash
 # Generate lyrics starting with "In the morning light"
 ./LyricsGenerator/lyrics.sh "In the morning light"
 
-# Output will be generated lyrics in Taylor Swift's style
+# Output: Generated lyrics in Taylor Swift's style
 ```
 
-### Play MIDI with Visualization
+#### 2. Compose Melody
+```bash
+# Generate melody based on a prompt
+./SongComposer/composer.sh "Write a song about love"
+
+# Output: Symbolic music format in melody.txt
+```
+
+#### 3. Convert to MIDI
+```bash
+# Convert symbolic music to MIDI
+./SongComposer/convert.sh melody.txt output.mid
+
+# Output: MIDI file ready for playback
+```
+
+#### 4. Play & Visualize
 ```bash
 # Start the 3D audio visualizer
+cd MIDIPlayer/scripts
+python visualizer.py
+```
+
+### Individual Component Usage
+
+#### Generate Lyrics Only
+```bash
+./LyricsGenerator/lyrics.sh "It was a dark and stormy night"
+```
+
+#### Compose Melody Only
+```bash
+./SongComposer/composer.sh "Write a song about love"
+```
+
+#### Convert MIDI Only
+```bash
+./SongComposer/convert.sh input.txt output.mid
+```
+
+#### Play MIDI with Visualization
+```bash
 cd MIDIPlayer/scripts
 python visualizer.py
 ```
@@ -198,14 +311,14 @@ python visualizer.py
 ### Minimum Requirements
 - **OS**: Any (tested on macOS 26 Tahoe)
 - **Python**: 3.11+
-- **RAM**: 8GB+
-- **Storage**: 2GB free space
+- **RAM**: 20GB+
+- **Storage**: 32GB free space
 
 ### Recommended Requirements
 - **OS**: Any
 - **Python**: 3.11+
-- **RAM**: 16GB+
-- **Storage**: 5GB free space
+- **RAM**: 18GB+
+- **Storage**: 32GB free space
 - **GPU**: Apple Silicon or NVIDIA GPU
 
 ## 📄 License
@@ -213,7 +326,9 @@ python visualizer.py
 This project is for educational and research purposes. Please respect copyright laws when using generated content.
 
 
-## 📞 Support
+## 📞 Support & Contributing
+
+I am unable to test the SongComposer component on my own device as I lack RAM. If you are able to test it and fix any bugs, please submit a PR.  
 
 For issues and questions:
 1. Check the troubleshooting section
