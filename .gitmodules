@@ -1,6 +1,0 @@
-[submodule "AccoMontage2"]
-	path = AccoMontage2
-	url = https://github.com/billyblu2000/AccoMontage2.git
-[submodule "MelodyGen/muzic"]
-	path = MelodyGen/muzic
-	url = https://github.com/microsoft/muzic.git
